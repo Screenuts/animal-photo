@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
 })
 export class CameraComponent implements OnInit {
 
-  img: any;
+  image: SafeResourceUrl;
 
   constructor() { }
 
@@ -18,7 +19,9 @@ export class CameraComponent implements OnInit {
 
   async takePicture() {
 
-    const captureImage = await Plugins.Camera.getPhoto(
+    const { Camera } = Plugins;
+
+    const result = await Camera.getPhoto(
       {
         quality: 90,
         allowEditing: true,
@@ -27,7 +30,7 @@ export class CameraComponent implements OnInit {
       }
     );
 
-    this.img = captureImage.webPath;
+    this.image = result.webPath;
 
   }
 }
