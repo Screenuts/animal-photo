@@ -24,7 +24,6 @@ export class CameraComponent implements OnInit {
     const result = await Camera.getPhoto(
       {
         quality: 90,
-        allowEditing: true,
         source: CameraSource.Camera,
         resultType: CameraResultType.Uri
       }
